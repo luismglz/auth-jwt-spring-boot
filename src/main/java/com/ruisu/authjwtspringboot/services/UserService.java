@@ -1,12 +1,11 @@
 package com.ruisu.authjwtspringboot.services;
 
-import com.ruisu.authjwtspringboot.dto.CredentialsDto;
-import com.ruisu.authjwtspringboot.dto.UserDto;
+import com.ruisu.authjwtspringboot.dtos.CredentialsDto;
+import com.ruisu.authjwtspringboot.dtos.UserDto;
 import com.ruisu.authjwtspringboot.entities.User;
 import com.ruisu.authjwtspringboot.exceptions.AppException;
 import com.ruisu.authjwtspringboot.mappers.UserMapper;
 import com.ruisu.authjwtspringboot.repositories.UserRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;

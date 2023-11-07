@@ -1,4 +1,4 @@
-package com.ruisu.authjwtspringboot.dto;
+package com.ruisu.authjwtspringboot.dtos;
 
 public record CredentialsDto(String userName, char[] password) {
 }

@@ -1,7 +1,7 @@
 package com.ruisu.authjwtspringboot.controllers;
 
-import com.ruisu.authjwtspringboot.dto.CredentialsDto;
-import com.ruisu.authjwtspringboot.dto.UserDto;
+import com.ruisu.authjwtspringboot.dtos.CredentialsDto;
+import com.ruisu.authjwtspringboot.dtos.UserDto;
 import com.ruisu.authjwtspringboot.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

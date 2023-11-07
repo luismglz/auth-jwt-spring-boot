@@ -1,4 +1,4 @@
-package com.ruisu.authjwtspringboot.dto;
+package com.ruisu.authjwtspringboot.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
