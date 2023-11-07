@@ -1,6 +1,7 @@
 package com.ruisu.authjwtspringboot.services;
 
 import com.ruisu.authjwtspringboot.dtos.CredentialsDto;
+import com.ruisu.authjwtspringboot.dtos.SignUpDto;
 import com.ruisu.authjwtspringboot.dtos.UserDto;
 import com.ruisu.authjwtspringboot.entities.User;
 import com.ruisu.authjwtspringboot.exceptions.AppException;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +33,21 @@ public class UserService {
         }
 
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
+    }
 
+    public UserDto signup(SignUpDto signUpDto){
+        Optional<User> optionalUser = userRepository.findByUserName(signUpDto.userName());
+
+        if(optionalUser.isPresent()){
+            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
+        }
+
+        User user = userMapper.signUpToUser(signUpDto);
+
+        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(signUpDto.password())));
+
+        User savedUser = userRepository.save(user);
+        return userMapper.toUserDto(savedUser);
     }
 
 }
