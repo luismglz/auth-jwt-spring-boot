@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -23,11 +24,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if(header != null){
-            String[] authElements = header.split(" ");
 
-            if(authElements.length == 2 && "Bearer".equals(authElements[0])){
+            //separate "Bearer" and token in a String array
+            String[] bearerToken = header.split(" ");
+
+            if(bearerToken.length == 2 && "Bearer".equals(bearerToken[0])){
                 try{
-                    SecurityContextHolder.getContext().setAuthentication(userAuthenticationProvider.validateToken(authElements[1]));
+                    if("GET".equals(request.getMethod())){
+                        SecurityContextHolder.getContext().setAuthentication(userAuthenticationProvider.validateToken(bearerToken[1]));
+                    }else{
+                        SecurityContextHolder.getContext().setAuthentication(userAuthenticationProvider.validateTokenStrongly(bearerToken[1]));
+                    }
+
 
                 }catch (RuntimeException exception){
                     SecurityContextHolder.clearContext();
