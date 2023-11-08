@@ -10,3 +10,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: 'create-drop'
+  security:
+    jwt:
+      token:
+        secret-key: ${TOKEN_SECRET_KEY}
